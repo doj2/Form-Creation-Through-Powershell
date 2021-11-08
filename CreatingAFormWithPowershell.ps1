@@ -1,6 +1,6 @@
 ﻿#Form creation using powershell
 
-#Load assemblies fro form creation
+#Load assemblies for form creation
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
