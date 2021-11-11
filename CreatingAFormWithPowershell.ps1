@@ -1,5 +1,3 @@
-﻿#Form creation using powershell
-
 #Load assemblies for form creation
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
@@ -13,11 +11,17 @@ $Form.AutoSizeMode = "GrowAndShrink"
 $Form.Text = "My Test Form"
 
 #Creating a label for the form and placing it into a variable
-$Label = New-Object System.Windows.Forms.Label
-$Label.AutoSize = $true
-$Font = New-Object System.Drawing.Font("Arial",15,[System.Drawing.FontStyle]::Bold)
-$form.Font = $Font
-$Label.Text = "This is my label for the form"
+$label = New-Object System.Windows.Forms.Label
+$label.Location = New-Object System.Drawing.Point(10,20)
+$label.Size = New-Object System.Drawing.Size(280,20)
+$label.Text = 'Please enter the information in the space below:'
+$form.Controls.Add($label)
+
+#creating a input text box
+$textBox = New-Object System.Windows.Forms.TextBox
+$textBox.Location = New-Object System.Drawing.Point(10,40)
+$textBox.Size = New-Object System.Drawing.Size(260,20)
+$form.Controls.Add($textBox)
 
 #creating and sizing the ok button
 $okButton = New-Object System.Windows.Forms.Button
@@ -37,6 +41,14 @@ $cancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
 $form.CancelButton = $cancelButton
 $form.Controls.Add($cancelButton)
 
-#Adding the label object to the form and running the form app
-$Form.Controls.Add($Label)
-$Form.ShowDialog()
+#running the form app
+#$Form.ShowDialog()
+
+$form.Add_Shown({$textBox.Select()})
+$result = $form.ShowDialog()
+
+if ($result -eq [System.Windows.Forms.DialogResult]::OK)
+{
+    $x = $textBox.Text
+    $x
+}
