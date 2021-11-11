@@ -41,9 +41,7 @@ $cancelButton.DialogResult = [System.Windows.Forms.DialogResult]::Cancel
 $form.CancelButton = $cancelButton
 $form.Controls.Add($cancelButton)
 
-#running the form app
-#$Form.ShowDialog()
-
+#Running the app
 $form.Add_Shown({$textBox.Select()})
 $result = $form.ShowDialog()
 
